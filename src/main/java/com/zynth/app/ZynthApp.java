@@ -1296,9 +1296,9 @@ public class ZynthApp extends Application {
 
     private Image loadAppLogo() {
         try {
-            File icoFile = new File("src/logo/logo.ico");
-            if (icoFile.exists()) {
-                try (FileInputStream in = new FileInputStream(icoFile)) {
+            File jpgFile = new File("src/logo/logo.jpg");
+            if (jpgFile.exists()) {
+                try (FileInputStream in = new FileInputStream(jpgFile)) {
                     return new Image(in);
                 }
             }
@@ -1308,9 +1308,9 @@ public class ZynthApp extends Application {
                     return new Image(in);
                 }
             }
-            File jpgFile = new File("src/logo/logo.jpg");
-            if (jpgFile.exists()) {
-                try (FileInputStream in = new FileInputStream(jpgFile)) {
+            File icoFile = new File("src/logo/logo.ico");
+            if (icoFile.exists()) {
+                try (FileInputStream in = new FileInputStream(icoFile)) {
                     return new Image(in);
                 }
             }

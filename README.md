@@ -1,44 +1,77 @@
 # Zynth Schema Designer v1.0.0
 
-Zynth is a JavaFX desktop schema designer for PostgreSQL and Supabase. It gives you visual modeling, table/column editing, relationship mapping, and live SQL/Prisma generation in a release-focused desktop workflow.
+Zynth is a visual schema design platform for PostgreSQL and Supabase.  
+It helps teams move from raw ideas to deployable schema output with fewer mistakes, clearer relationships, and faster iteration.
 
-## Core capabilities
+![Zynth Snapshot 1](snap1.jpg)
+![Zynth Snapshot 2](snap2.jpg)
 
-- Visual canvas with draggable tables and relationship lines
-- Schema-grouped explorer with table and column tree
-- Table editor (name/schema/realtime)
-- Column editor (type/default/nullability/PK/unique/ENUM/FK)
-- Relationship builder dialog
-- Live code generation:
-  - SQL DDL
-  - Prisma schema
-  - migration diff from baseline
-- Undo/redo workflow (`Ctrl+Z` / `Ctrl+Y`)
-- Save/load project format: `.zynth`
-- Optional database integration:
-  - Connect to PostgreSQL/Supabase
-  - Import schema
-  - Apply generated SQL to connected DB
-  - Backup generated SQL
+## What this project is all about
 
-## v1.0.0 UX behavior
+Database design is often fragmented:
 
-- Fixed panel layout (Explorer + right panel are always visible and locked)
-- Add Table now:
-  - uses active schema filter when applicable
-  - places new table in a non-overlapping position
-  - auto-centers camera on the new table
-- Canvas helpers:
-  - `Center Selected` toolbar button
-  - `Reset View` toolbar button
-  - `Ctrl+F` centers on selected table
-  - `Ctrl+0` resets zoom/pan
-- Branded icon loading supports:
-  - `src/logo/logo.ico`
-  - `src/logo/logo.png`
-  - `src/logo/logo.jpg`
+- planning happens in docs or whiteboards
+- SQL is written later in separate files
+- migration decisions happen in another place again
 
-## Run locally
+Zynth is designed to remove that fragmentation.
+
+You can model tables and relationships visually, edit constraints precisely, and see generated SQL/Prisma in real-time in one flow.  
+The app is intentionally built to keep architecture, implementation, and release packaging tightly aligned.
+
+## Who this is for
+
+- **New developers** learning relational data modeling
+- **Startup teams** iterating quickly on product schemas
+- **Backend engineers** needing reliable SQL/Prisma output
+- **Supabase builders** wanting connect/import/apply workflows
+- **Tech leads** reviewing schema intent before rollout
+
+## Why teams use Zynth
+
+- Faster schema iteration with visual clarity
+- Less rework from missing constraints and FK details
+- Better communication between developers and reviewers
+- Cleaner transition from design stage to executable schema code
+- Portable `.zynth` project files for collaboration and continuity
+
+## Core capabilities (deep breakdown)
+
+### Visual schema modeling
+
+- Drag and organize tables on canvas
+- Relationship lines help surface data architecture quickly
+- New tables are placed in non-overlapping positions
+- New table creation auto-centers focus on the created entity
+
+### Structured table and column editing
+
+- Table controls: name, schema, realtime toggle
+- Column controls: datatype, default value, nullable, PK, unique
+- Advanced fields: ENUM type/value configuration and FK targeting
+
+### Generation pipeline
+
+- Live SQL DDL preview
+- Live Prisma schema preview
+- Migration diff mode for change inspection against baseline
+
+### Database-assisted workflow
+
+- Connect to PostgreSQL/Supabase through JDBC
+- Import schema into visual workspace
+- Scope to selected schema from connected database
+- Apply generated SQL to connected database
+- Export backup SQL for safety
+
+### Productivity and navigation
+
+- Undo/redo (`Ctrl+Z`, `Ctrl+Y`)
+- Center selected table (`Ctrl+F`)
+- Reset canvas zoom/pan (`Ctrl+0`)
+- Stable locked layout for predictable panel behavior
+
+## Local development
 
 ```powershell
 cd "C:\Users\Administrator\Documents\ZYNTH"
@@ -51,7 +84,7 @@ Alternative:
 .\run-zynth.bat
 ```
 
-## Build and test
+## Build and verify
 
 ```powershell
 cd "C:\Users\Administrator\Documents\ZYNTH"
@@ -64,9 +97,9 @@ Expected artifact:
 target\zynth-schema-designer-1.0.0.jar
 ```
 
-## Build Windows EXE (exact commands)
+## Build Windows EXE
 
-### Recommended (with custom runtime)
+### Recommended (custom runtime + installer)
 
 ```powershell
 cd "C:\Users\Administrator\Documents\ZYNTH"
@@ -88,7 +121,7 @@ jpackage `
   --main-jar zynth-schema-designer-1.0.0.jar `
   --main-class com.zynth.app.ZynthApp `
   --runtime-image target\runtime `
-  --icon src\logo\logo.ico `
+  --icon src\logo\logo.jpg `
   --dest target\release `
   --vendor "Zynth" `
   --description "Zynth Schema Designer for PostgreSQL and Supabase" `
@@ -98,47 +131,36 @@ jpackage `
   --win-per-user-install
 ```
 
-### Fast one-line EXE command (no runtime-image step)
+### Fast one-line EXE command
 
 ```powershell
 cd "C:\Users\Administrator\Documents\ZYNTH"
-jpackage --type exe --name ZynthSchemaDesigner --app-version 1.0.0 --input target --main-jar zynth-schema-designer-1.0.0.jar --main-class com.zynth.app.ZynthApp --icon src\logo\logo.ico --dest target\release --vendor "Zynth" --description "Zynth Schema Designer for PostgreSQL and Supabase" --win-menu --win-shortcut --win-dir-chooser --win-per-user-install
+jpackage --type exe --name ZynthSchemaDesigner --app-version 1.0.0 --input target --main-jar zynth-schema-designer-1.0.0.jar --main-class com.zynth.app.ZynthApp --icon src\logo\logo.jpg --dest target\release --vendor "Zynth" --description "Zynth Schema Designer for PostgreSQL and Supabase" --win-menu --win-shortcut --win-dir-chooser --win-per-user-install
 ```
 
-Output directory:
+Output folder:
 
 ```text
 target\release\
 ```
 
-## DB connection quick reference
+## Website / release links
 
-JDBC URL format:
+- Project repository: `https://github.com/AstroNutws/ZYNTH/tree/main`
+- Latest releases: `https://github.com/AstroNutws/ZYNTH/releases/latest`
+- Landing page source: `index.html`
 
-```text
-jdbc:postgresql://db.<project-ref>.supabase.co:5432/postgres?sslmode=require
-```
+## Project layout
 
-Typical flow:
-
-1. Click `Connect Supabase`
-2. Enter JDBC URL, username, password
-3. Connect only or connect + import
-4. Use `Select Schema From DB` for scoped import
-5. Use `Apply To Database` for generated SQL deployment
-
-## Project structure
-
-- `src/main/java/com/zynth/app/` - desktop app + canvas
-- `src/main/java/com/zynth/model/` - schema model
-- `src/main/java/com/zynth/generator/` - SQL/Prisma generators
-- `src/main/java/com/zynth/io/` - persistence/import/connect helpers
-- `src/main/resources/zynth-theme.css` - dark theme
-- `src/logo/` - app icons
-- `tutorial.md` - release packaging steps
+- `src/main/java/com/zynth/app/` - app shell and canvas behavior
+- `src/main/java/com/zynth/model/` - schema domain model
+- `src/main/java/com/zynth/generator/` - SQL and Prisma generators
+- `src/main/java/com/zynth/io/` - persistence and DB I/O
+- `src/main/resources/zynth-theme.css` - dark UI theme
+- `src/logo/` - app icons (`logo.jpg`, `logo.png`, `logo.ico`)
 - `requirements.md` - runtime/build requirements
 
-## Contributors
+## Maintainers / contributors
 
 - AstronNutws
 - Gab.Dev
