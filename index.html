@@ -422,6 +422,23 @@
         </div>
       </div>
     </section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="download-panel">
+        <div>
+          <p>
+            Have suggestions, feedback, feature ideas, or found a bug? Send a message anytime.
+          </p>
+          <div class="small">
+            Your feedback helps improve Zynth for everyone.
+          </div>
+        </div>
+        <div>
+          <a class="btn btn-main" href="mailto:samongud@gmail.com?subject=Zynth%20Suggestion">Email Samongud</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -434,7 +451,6 @@
     const owner = "AstroNutws";
     const repo = "ZYNTH";
     const latestReleaseApi = `https://api.github.com/repos/${owner}/${repo}/releases/latest`;
-    const fallbackLatest = `https://github.com/${owner}/${repo}/releases/latest`;
     let resolvedZipUrl = null;
 
     async function resolveLatestZipUrl() {
@@ -451,17 +467,27 @@
           if (status) status.textContent = `Latest: ${release.tag_name || "release"} • Ready to download ${zipAsset.name}`;
           return resolvedZipUrl;
         }
-        if (status) status.textContent = "No .zip asset found on latest release. Falling back to release page.";
+        if (status) status.textContent = "No .zip asset found on the latest release yet.";
       } catch (err) {
-        if (status) status.textContent = "Could not resolve latest .zip automatically. Falling back to release page.";
+        if (status) status.textContent = "Could not resolve the latest .zip right now.";
       }
-      resolvedZipUrl = fallbackLatest;
-      return resolvedZipUrl;
+      resolvedZipUrl = null;
+      return null;
     }
 
     async function startAutoDownload() {
       const url = await resolveLatestZipUrl();
-      window.location.href = url;
+      if (!url) {
+        alert("Latest .zip is not available yet. Please upload a .zip asset to the latest GitHub release.");
+        return;
+      }
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "";
+      a.rel = "noopener";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
     }
 
     function bindDownloadButtons() {
