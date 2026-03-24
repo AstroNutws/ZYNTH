@@ -1,0 +1,16 @@
+# Maven build output
+target/
+
+# Temporary build folders
+build-input/
+
+# IDE specific files
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS generated files
+.DS_Store
+Thumbs.db
