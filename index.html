@@ -463,15 +463,19 @@
         if (!response.ok) throw new Error(`release lookup failed (${response.status})`);
         const release = await response.json();
         const assets = Array.isArray(release.assets) ? release.assets : [];
-        const zipAsset = assets.find(a => typeof a.name === "string" && a.name.toLowerCase().endsWith(".zip"));
-        if (zipAsset && zipAsset.browser_download_url) {
-          resolvedZipUrl = zipAsset.browser_download_url;
-          if (status) status.textContent = `Latest: ${release.tag_name || "release"} • Ready to download ${zipAsset.name}`;
+        const archiveExt = [".zip", ".rar", ".7z"];
+        const archiveAsset = assets.find(a =>
+          typeof a.name === "string" &&
+          archiveExt.some(ext => a.name.toLowerCase().endsWith(ext))
+        );
+        if (archiveAsset && archiveAsset.browser_download_url) {
+          resolvedZipUrl = archiveAsset.browser_download_url;
+          if (status) status.textContent = `Latest: ${release.tag_name || "release"} • Ready to download ${archiveAsset.name}`;
           return resolvedZipUrl;
         }
-        if (status) status.textContent = "No .zip asset found on the latest release yet.";
+        if (status) status.textContent = "No compressed archive (.zip/.rar/.7z) found on the latest release yet.";
       } catch (err) {
-        if (status) status.textContent = "Could not resolve the latest .zip right now.";
+        if (status) status.textContent = "Could not resolve the latest archive right now.";
       }
       resolvedZipUrl = null;
       return null;
@@ -480,7 +484,7 @@
     async function startAutoDownload() {
       const url = await resolveLatestZipUrl();
       if (!url) {
-        alert("Latest .zip is not available yet. Please upload a .zip asset to the latest GitHub release.");
+        alert("Latest archive is not available yet. Please upload a .zip, .rar, or .7z asset to the latest GitHub release.");
         return;
       }
       const a = document.createElement("a");
