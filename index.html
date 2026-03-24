@@ -49,7 +49,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 12px 0;
+      padding: 10px 0;
     }
     .brand {
       display: flex;
@@ -70,15 +70,25 @@
     }
     .nav-links {
       display: flex;
-      gap: 16px;
+      gap: 10px;
       align-items: center;
+      background: rgba(14, 28, 53, 0.72);
+      border: 1px solid var(--border);
+      padding: 6px;
+      border-radius: 12px;
     }
     .nav-links a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      transition: background-color .2s ease, color .2s ease;
     }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(87, 131, 220, 0.16);
+    }
     .btn {
       display: inline-flex;
       align-items: center;
@@ -98,6 +108,7 @@
     .btn-main {
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
       box-shadow: 0 10px 26px rgba(87, 134, 255, 0.35);
+      border-color: rgba(152, 194, 255, 0.3);
     }
     .btn-ghost {
       background: #14233f;
@@ -123,6 +134,21 @@
       line-height: 1.75;
       font-size: 16px;
       max-width: 66ch;
+    }
+    .open-source-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid #2f4f82;
+      background: rgba(58, 96, 172, 0.2);
+      color: #b8cdf2;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      text-transform: uppercase;
     }
     .hero-actions {
       margin-top: 20px;
@@ -299,6 +325,7 @@
         <a href="#snapshots">Snapshots</a>
         <a href="#download">Download</a>
         <a href="#contact">Contact</a>
+        <a href="https://github.com/AstroNutws/ZYNTH/tree/main">Open Source</a>
         <a class="btn btn-main" href="#" id="downloadBtnTop">Auto Download .zip</a>
       </nav>
     </div>
@@ -307,6 +334,7 @@
   <main id="top" class="container">
     <section class="hero section show">
       <div>
+        <div class="open-source-badge">Open Source • MIT Licensed</div>
         <h1>Schema design that feels visual, fast, and production-ready.</h1>
         <p>
           Zynth is a desktop schema designer for PostgreSQL and Supabase that helps teams move from rough ideas to
