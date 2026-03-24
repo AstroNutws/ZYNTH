@@ -1,0 +1,22 @@
+mvn package -DskipTests 
+
+Remove-Item -Path "build-input" -Recurse -Force -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Force -Path "build-input"
+Copy-Item "target\zynth-schema-designer-1.0.0.jar" -Destination "build-input\"
+
+$FX_JMODS = "C:\Program Files\javafx-jmods-25.0.2"
+$JDK_JMODS = "C:\Program Files\Java\jdk-25.0.2\jmods"
+
+& "C:\Program Files\Java\jdk-25.0.2\bin\jpackage.exe" `
+  --type app-image `
+  --name ZynthSchemaDesigner `
+  --app-version 1.0.0 `
+  --input build-input `
+  --main-jar zynth-schema-designer-1.0.0.jar `
+  --main-class com.zynth.app.ZynthApp `
+  --icon src\logo\logo.ico `
+  --dest target\release `
+  --vendor "Zynth" `
+  --win-console `
+  --module-path "$FX_JMODS;$JDK_JMODS" `
+  --add-modules java.base,java.desktop,java.sql,javafx.controls,javafx.fxml,javafx.graphics

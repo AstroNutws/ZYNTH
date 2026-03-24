@@ -1,0 +1,107 @@
+.root {
+    -fx-font-family: "Segoe UI", "Inter", sans-serif;
+    -fx-font-size: 15px;
+    -fx-base: #0f1522;
+    -fx-background: #0f1522;
+    -fx-control-inner-background: #121b2b;
+    -fx-text-fill: #dce8ff;
+}
+
+.label {
+    -fx-text-fill: #dce8ff;
+}
+
+.tool-bar.zynth-toolbar {
+    -fx-background-color: linear-gradient(to right, #111a2b, #1a2040);
+    -fx-border-color: #2e3d5d;
+    -fx-border-width: 0 0 1 0;
+}
+
+.zynth-toolbar {
+    -fx-background-color: linear-gradient(to right, #111a2b, #1a2040);
+    -fx-border-color: #2e3d5d;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 8;
+}
+
+.zynth-toolbar-wrap {
+    -fx-hgap: 8;
+    -fx-vgap: 8;
+}
+
+.button {
+    -fx-background-color: #1f2f4d;
+    -fx-text-fill: #dce8ff;
+    -fx-font-size: 13px;
+    -fx-padding: 7 12;
+    -fx-min-width: 78;
+    -fx-background-radius: 8;
+    -fx-border-color: #3d5b91;
+    -fx-border-radius: 8;
+}
+
+.button:hover {
+    -fx-background-color: #27406d;
+}
+
+.combo-box,
+.text-field,
+.text-area {
+    -fx-background-color: #111b2b;
+    -fx-control-inner-background: #111b2b;
+    -fx-text-fill: #dce8ff;
+    -fx-font-size: 14px;
+    -fx-pref-height: 36px;
+    -fx-highlight-fill: #3d6ef7;
+    -fx-highlight-text-fill: white;
+    -fx-border-color: #2f4468;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.list-view,
+.tree-view {
+    -fx-background-color: #111b2b;
+    -fx-control-inner-background: #111b2b;
+    -fx-text-fill: #dce8ff;
+    -fx-font-size: 14px;
+    -fx-highlight-fill: #3d6ef7;
+    -fx-highlight-text-fill: white;
+    -fx-border-color: #2f4468;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.column-list {
+    -fx-min-height: 260px;
+    -fx-pref-height: 360px;
+}
+
+.split-pane {
+    -fx-background-color: #0f1522;
+}
+
+.panel {
+    -fx-background-color: linear-gradient(to bottom, #111b2b, #0f1726);
+    -fx-border-color: #263753;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+
+.zynth-logo {
+    -fx-font-size: 74px;
+    -fx-font-weight: 900;
+    -fx-text-fill: linear-gradient(to right, #7f5cff, #3be8ff);
+}
+
+.zynth-sub {
+    -fx-font-size: 18px;
+    -fx-text-fill: #9bc8ff;
+}
+
+.zynth-status {
+    -fx-background-color: #111a2a;
+    -fx-border-color: #2b3f63;
+    -fx-border-width: 1 0 0 0;
+}
